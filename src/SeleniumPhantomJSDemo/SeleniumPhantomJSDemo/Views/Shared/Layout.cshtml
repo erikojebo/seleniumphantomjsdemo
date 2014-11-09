@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="spd">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>{{ $scope.pageTitle }} - Selenium & PhantomJS Demo</title>
+    </head>
+    <body id="selenium-phantomjs-demo">
+
+        <script type="text/javascript">
+            var spd = {
+                url: {
+                    baseUrl: '@Url.Content("~")'
+                }
+            };
+        </script>
+
+        <script type="text/javascript" src="~/scripts/angular.js"></script>
+        <script type="text/javascript" src="~/scripts/angular-route.js"></script>
+        <script type="text/javascript" src="~/scripts/common/url.js"></script>
+        <script type="text/javascript" src="~/scripts/common/app.js"></script>
+
+        @RenderSection("scripts", required: false)
+    </body>
+
+</html>
