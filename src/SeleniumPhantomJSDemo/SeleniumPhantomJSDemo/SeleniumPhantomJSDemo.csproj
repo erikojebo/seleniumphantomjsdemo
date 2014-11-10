@@ -113,12 +113,20 @@
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\common\app.js" />
+    <Content Include="scripts\pages\customers\editCustomerController.js" />
+    <Content Include="scripts\pages\pageService.js" />
+    <Content Include="scripts\pages\pageController.js" />
+    <Content Include="scripts\pages\customers\addCustomerController.js" />
+    <Content Include="scripts\pages\customers\customerDetailsController.js" />
+    <Content Include="scripts\pages\customers\customersController.js" />
     <Content Include="Web.config" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\CustomerViews\Add.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\CustomerViews\Details.cshtml" />
+    <Content Include="Views\CustomerViews\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -126,9 +134,11 @@
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\CustomerViewsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\WebApiConfigurationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="scripts\pages\" />
-    <Folder Include="Views\Customers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

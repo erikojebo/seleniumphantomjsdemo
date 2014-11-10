@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
 
-<html ng-app="spd">
+<html ng-app="spd" ng-controller="pageController">
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title>{{ $scope.pageTitle }} - Selenium & PhantomJS Demo</title>
+        <title ng-bind="page.title()"></title>
     </head>
     <body id="selenium-phantomjs-demo">
+        
+        @RenderBody()
 
         <script type="text/javascript">
             var spd = {
@@ -19,6 +21,12 @@
         <script type="text/javascript" src="~/scripts/angular-route.js"></script>
         <script type="text/javascript" src="~/scripts/common/url.js"></script>
         <script type="text/javascript" src="~/scripts/common/app.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/pageController.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/pageService.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/customers/customersController.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/customers/customerDetailsController.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/customers/addCustomerController.js"></script>
+        <script type="text/javascript" src="~/scripts/pages/customers/editCustomerController.js"></script>
 
         @RenderSection("scripts", required: false)
     </body>

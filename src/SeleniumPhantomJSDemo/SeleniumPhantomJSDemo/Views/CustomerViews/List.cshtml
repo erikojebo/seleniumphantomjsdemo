@@ -5,8 +5,10 @@
 <ul class="customer-list">
     <li class="customer" ng-repeat="customer in customers">
         <a href="#/customers/{{ customer.id }}">
-            <span class="name">{{ customer.fullName }}</span>
+            <span class="name">{{ customer.fullName() }}</span>
             <span class="email">({{ customer.email }})</span>
         </a>
     </li>
 </ul>
+
+<a href="#/customers/add">Add new customer</a>

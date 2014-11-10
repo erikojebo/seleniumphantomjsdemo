@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using SeleniumPhantomJSDemo.Extensions;
 
 namespace SeleniumPhantomJSDemo
 {
@@ -19,6 +23,8 @@ namespace SeleniumPhantomJSDemo
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-        }
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ApplyApplicationDefaults();
+         }
     }
 }

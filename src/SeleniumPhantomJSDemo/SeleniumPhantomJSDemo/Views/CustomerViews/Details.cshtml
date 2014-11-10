@@ -1,0 +1,18 @@
+﻿<section class="customer-details">
+    <dl>
+        <dt>First name</dt>
+        <dd>{{ customer.firstName }}</dd>
+        
+        <dt>Last name</dt>
+        <dd>{{ customer.lastName }}</dd>
+        
+        <dt>Email</dt>
+        <dd>{{ customer.email }}</dd>
+        
+        <dt>Registration date</dt>
+        <dd>{{ customer.createdDate }}</dd>
+    </dl>
+</section>
+
+<a href="#/customers/{{ customer.id }}/edit">Edit</a>
+<a href="#/customers">Back to list</a>

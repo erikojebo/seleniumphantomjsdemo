@@ -1,11 +1,11 @@
-﻿<form ng-submit="add()">
+﻿<form ng-submit="save()">
     <fieldset>
         <input type="text" name="firstName" placeholder="First name" ng-model="customer.firstName" />
         <input type="text" name="lastName" placeholder="Last name" ng-model="customer.lastName" />
         <input type="text" name="email" placeholder="Email" ng-model="customer.email" />
-        
-        <input type="submit" value="Add" />
+
+        <input type="submit" value="Save" />
     </fieldset>
 </form>
 
-<a href="#/customers">Cancel</a>
+<a href="#/customers/{{ customer.id }}">Cancel</a>
