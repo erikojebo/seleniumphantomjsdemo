@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Persistence\SQL\Schema.sql" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-route.js" />
     <Content Include="scripts\angular-route.min.js" />
@@ -134,11 +135,13 @@
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\CustomerViewsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Entities\Customer.cs" />
     <Compile Include="Extensions\WebApiConfigurationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Persistence\DemoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,79 +6,91 @@ using System.Text;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Newtonsoft.Json;
+using SeleniumPhantomJSDemo.Entities;
 using SeleniumPhantomJSDemo.Extensions;
 using SeleniumPhantomJSDemo.Models;
+using SeleniumPhantomJSDemo.Persistence;
 
 namespace SeleniumPhantomJSDemo.Controllers.Api
 {
     public class CustomersController : ApiController
     {
-        private static readonly IList<CustomerModel> _customers = new List<CustomerModel>()
-        {
-            new CustomerModel()
-            {
-                Id = 1,
-                FirstName = "Sven",
-                LastName = "Karlsson",
-                Email = "sven@karlsson.se",
-                CreatedDate = new DateTime(2012, 1, 2)
-            },
-            new CustomerModel()
-            {
-                Id = 2,
-                FirstName = "Karl",
-                LastName = "Svensson",
-                Email = "karl@svensson.se",
-                CreatedDate = new DateTime(2014, 7, 28)
-            }
-        };
-
         public IHttpActionResult Get(int id)
         {
-            var existing = _customers.SingleOrDefault(x => x.Id == id);
+            using (var context = new DemoContext())
+            {
+                var existing = context.Customers.SingleOrDefault(x => x.Id == id);
 
-            if (existing == null)
-                return NotFound();
+                if (existing == null)
+                    return NotFound();
 
-            return Json(existing);
+                return Json(existing);
+            }
         }
 
         public IEnumerable<CustomerModel> Get()
         {
-            return _customers;
+            using (var context = new DemoContext())
+            {
+                return context.Customers.Select(CustomerModel.FromCustomer).ToList();
+            }
         }
 
-        public IHttpActionResult Post(CustomerModel newCustomer)
+        public IHttpActionResult Post(CustomerModel postedCustomer)
         {
-            newCustomer.Id = _customers.Max(x => x.Id) + 1;
+            using (var context = new DemoContext())
+            {
+                var newCustomer = new Customer()
+                {
+                    FirstName = postedCustomer.FirstName,
+                    LastName = postedCustomer.LastName,
+                    Email = postedCustomer.Email
+                };
 
-            _customers.Add(newCustomer);
+                context.Customers.Add(newCustomer);
 
-            return Created(Url.Link("DefaultApi", new { controller = "Customers", id = newCustomer.Id }), newCustomer);
+                context.SaveChanges();
+
+                var newCustomerModel = CustomerModel.FromCustomer(newCustomer);
+
+                return Created(Url.Link("DefaultApi", new { controller = "Customers", id = newCustomer.Id }), newCustomerModel);
+            }
         }
 
         public IHttpActionResult Put(CustomerModel updatedCustomer)
         {
-            var existing = _customers.SingleOrDefault(x => x.Id == updatedCustomer.Id);
+            using (var context = new DemoContext())
+            {
+                var existing = context.Customers.SingleOrDefault(x => x.Id == updatedCustomer.Id);
 
-            if (existing == null)
-                return NotFound();
+                if (existing == null)
+                    return NotFound();
 
-            existing.FirstName = updatedCustomer.FirstName;
-            existing.LastName = updatedCustomer.LastName;
-            existing.Email = updatedCustomer.Email;
+                existing.FirstName = updatedCustomer.FirstName;
+                existing.LastName = updatedCustomer.LastName;
+                existing.Email = updatedCustomer.Email;
 
-            return StatusCode(HttpStatusCode.NoContent);
+                context.SaveChanges();
+
+                return StatusCode(HttpStatusCode.NoContent);
+            }
         }
 
         public IHttpActionResult Delete(int id)
         {
-            var existing = _customers.SingleOrDefault(x => x.Id == id);
+            using (var context = new DemoContext())
+            {
+                var existing = context.Customers.SingleOrDefault(x => x.Id == id);
 
-            if (existing == null)
-                return NotFound();
+                if (existing == null)
+                    return NotFound();
 
-            return StatusCode(HttpStatusCode.NoContent);
+                context.Customers.Remove(existing);
+
+                context.SaveChanges();
+
+                return StatusCode(HttpStatusCode.NoContent);
+            }
         }
 
         protected override JsonResult<T> Json<T>(T content, JsonSerializerSettings serializerSettings, Encoding encoding)

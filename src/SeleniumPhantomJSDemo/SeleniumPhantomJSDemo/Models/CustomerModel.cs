@@ -1,4 +1,5 @@
 ﻿using System;
+using SeleniumPhantomJSDemo.Entities;
 
 namespace SeleniumPhantomJSDemo.Models
 {
@@ -9,5 +10,17 @@ namespace SeleniumPhantomJSDemo.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public static CustomerModel FromCustomer(Customer customer)
+        {
+            return new CustomerModel()
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Email = customer.Email,
+                CreatedDate = customer.CreatedDate
+            };
+        }
     }
 }
