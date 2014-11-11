@@ -2,7 +2,7 @@
     ViewBag.Title = "Customers";
 }
 
-<ul class="customer-list">
+<ul id="customer-list">
     <li class="customer" ng-repeat="customer in customers">
         <a href="#/customers/{{ customer.id }}">
             <span class="name">{{ customer.fullName() }}</span>
@@ -11,4 +11,4 @@
     </li>
 </ul>
 
-<a href="#/customers/add">Add new customer</a>
+<a id="add-customer-link" href="#/customers/add">Add new customer</a>

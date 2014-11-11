@@ -2,7 +2,9 @@
 
     page.setTitle("Edit customer");
 
-    $http.get(spd.url.create("api/customers/" + $routeParams.customerId))
+    var customerId = $routeParams.customerId;
+
+    $http.get(spd.url.create("api/customers/" + customerId))
         .success(function(data) {
             $scope.customer = data;
         });
@@ -11,7 +13,7 @@
     $scope.save = function() {
         $http.put(spd.url.create("api/customers/"), $scope.customer)
             .success(function() {
-                $location.path("/customers");
+                $location.path("/customers/" + customerId);
             }).error(function() {
 
             });
